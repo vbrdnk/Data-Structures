@@ -1,33 +1,91 @@
-function LinkedList() {
-	this.head = null;
-	this.tail = null;
+class Node {
+	constructor(value, next, previous) {
+		this.value = value;
+		this.next = next;
+		this.previous = previous;
+	}
 }
 
-function Node(value, next, previous) {
-	this.value = value;
-	this.next = next;
-	this.previous = previous;
-}
-
-LinkedList.prototype.addToHead = function(value) {
-	let newNode = new Node(value, this.head, null);
-	if (this.head) {
-		this.head.previous = newNode;
-	} else {
-		this.tail = newNode;
+class LinkedList {
+	constructor() {
+		this.head = null;
+		this.tail = null;
 	}
 
-	this.head = newNode;
-};
+	addToHead(value) {
+		let newNode = new Node(value, this.head, null);
+		if (this.head) {
+			this.head.previous = newNode;
+		} else {
+			this.tail = newNode;
+		}
 
-LinkedList.prototype.addToTail = function(value) {
-	let newNode = new Node(value, null, this.tail);
-
-	if (this.tail) {
-		this.tail.next = newNode;
-	} else {
 		this.head = newNode;
 	}
 
-	this.tail = newNode;
-};
+	addToTail(value) {
+		let newNode = new Node(value, null, this.tail);
+
+		if (this.tail) {
+			this.tail.next = newNode;
+		} else {
+			this.head = newNode;
+		}
+
+		this.tail = newNode;
+	}
+
+	removeHead() {
+		if (!this.head) {
+			return null;
+		}
+
+		let currentHeadVal = this.head.value;
+		this.head = this.head.next;
+
+		if (this.head) {
+			this.head.previous = null;
+		} else {
+			this.tail = null
+		}
+
+		return currentHeadVal;
+	}
+
+	removeTail() {
+		if (!this.tail) {
+			return null;
+		}
+
+		let currentTailVal = this.tail.value;
+		this.tail = this.tail.previous;
+
+		if (this.tail) {
+			this.tail.next = null;
+		} else {
+			this.head = null;
+		}
+
+		return currentTailVal;
+	}
+
+	search(searchValue) {
+		let currentNode = this.head;
+
+		while(currentNode) {
+			if (currentNode.value === searchValue) {
+				return currentNode.value;
+			}
+			currentNode = currentNode.next;
+		}
+
+		return null;
+	}
+}
+
+let ll = new LinkedList();
+ll.addToHead('one');
+ll.addToHead('two');
+ll.addToHead('three');
+
+console.log(ll.search('four'));
