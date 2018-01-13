@@ -81,11 +81,32 @@ class LinkedList {
 
 		return null;
 	}
+
+	indexOf(value) {
+		let indexes = [];
+		let currentIndex = 0;
+		let currentNode = this.head;
+
+		while(currentNode) {
+			if (currentNode.value === value) {
+				indexes.push(currentIndex);
+			}
+
+			currentNode = currentNode.next;
+			currentIndex++;
+		}
+
+		return indexes;
+	}
 }
 
 let ll = new LinkedList();
-ll.addToHead('one');
-ll.addToHead('two');
-ll.addToHead('three');
+ll.addToTail(1);
+ll.addToTail(5);
+ll.addToTail(3);
+ll.addToTail(5);
+ll.addToTail(8);
+ll.addToTail(7);
+ll.addToTail(5);
 
-console.log(ll.search('four'));
+console.log(ll.indexOf(5));
