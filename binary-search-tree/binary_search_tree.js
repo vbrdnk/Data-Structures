@@ -39,13 +39,8 @@ class BinarySearchTree {
 		}
 	}
 
-}
+	depthFirstTraversal(iteratorFunc) {
 
-let bst = new BinarySearchTree(50);
-bst.insert(40);
-bst.insert(42);
-bst.insert(52);
-bst.insert(54);
-console.log(bst.contains(43));
-console.log(bst.contains(42));
-// console.log(bst);
+	}
+
+}

@@ -99,14 +99,3 @@ class LinkedList {
 		return indexes;
 	}
 }
-
-let ll = new LinkedList();
-ll.addToTail(1);
-ll.addToTail(5);
-ll.addToTail(3);
-ll.addToTail(5);
-ll.addToTail(8);
-ll.addToTail(7);
-ll.addToTail(5);
-
-console.log(ll.indexOf(5));
