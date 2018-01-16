@@ -20,6 +20,25 @@ class BinarySearchTree {
 			}
 		}
 	}
+
+	contains(value) {
+		if (value === this.value) {
+			return true;
+		} else if (value < this.value) {
+			if (!this.left) {
+				return false;
+			} else {
+				return this.left.contains(value);
+			}
+		} else if (value > this.value) {
+			if (!this.right) {
+				return false;
+			} else {
+				return this.right.contains(value);
+			}
+		}
+	}
+
 }
 
 let bst = new BinarySearchTree(50);
@@ -27,4 +46,6 @@ bst.insert(40);
 bst.insert(42);
 bst.insert(52);
 bst.insert(54);
-console.log(bst);
+console.log(bst.contains(43));
+console.log(bst.contains(42));
+// console.log(bst);
