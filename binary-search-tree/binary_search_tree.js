@@ -57,4 +57,33 @@ class BinarySearchTree {
 		}
 	}
 
+	breadthFirstTraversal(iteratorFunc) {
+		let queue = [this];
+		while (queue.length) {
+			let treeNode = queue.shift();
+			iteratorFunc(treeNode);
+			if (treeNode.left) {
+				queue.push(treeNode.left);
+			}
+			if (treeNode.right) {
+				queue.push(treeNode.right);
+			}
+		}
+	}
+
+	getMinVal() {
+		if (this.left) {
+			return this.left.getMinVal();
+		} else {
+			return this.value;
+		}
+	}
+
+	getMaxVal() {
+		if (this.right) {
+			return this.right.getMaxVal();
+		} else {
+			return this.value;
+		}
+	}
 }
