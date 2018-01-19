@@ -23,22 +23,55 @@ class HashTable {
 
 	insert(key, value) {
 		let index = this.hash(key);
-		console.log('Index:', index);
+
 		if (!this.buckets[index]) {
 			this.buckets[index] = new HashTableNode(key, value);
+		} else if (this.buckets[index].key === key) {
+			this.buckets[index].value = value;
 		} else {
 			let currentNode = this.buckets[index];
 			while (currentNode.next) {
+				if (currentNode.next.key === key) {
+					currentNode.next.value = value;
+					return;
+				}
 				currentNode = currentNode.next;
 			}
 			currentNode.next = new HashTableNode(key, value);
 		}
 	}
+
+	get(key) {
+		let index = this.hash(key);
+
+		if (!this.buckets[index]) {
+			return null;
+		} else {
+			let currentNode = this.buckets[index];
+			while (currentNode) {
+				if (currentNode.key === key) {
+					return currentNode.value;
+				}
+				currentNode = currentNode.next;
+			}
+
+			return null;
+		}
+	}
+
+	retrieveAll() {
+		let allNodes = [];
+
+		for (let i = 0; i < this.numBuckets; i++) {
+			let currentNode = this.buckets[i];
+			while (currentNode) {
+				allNodes.push(currentNode);
+				currentNode = currentNode.next;
+			}
+		}
+
+		return allNodes;
+	}
+
 }
 
-
-let hashTable = new HashTable(30);
-hashTable.insert('Dean', 'dean@gmail.com');
-hashTable.insert('Megan', 'megan@gmail.com');
-hashTable.insert('Dane', 'dane@yahoo.com');
-console.log(hashTable.buckets);
